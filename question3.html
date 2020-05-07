@@ -1,0 +1,117 @@
+<html><head>
+		<title>UK Population Data Visualisation</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+	</head>
+	<body>
+		<canvas id="cvs" width="500" height="300" style="display: block;"></canvas>
+
+		<script>
+			var c = document.getElementById("cvs");
+			var ctx = c.getContext("2d");
+
+			var grad1 = ctx.createLinearGradient(0, 0, 0, c.height);
+			grad1.addColorStop(0, "violet");
+			grad1.addColorStop(1, "red");
+
+			var jsData = {
+				  "fields": ["England", "Scotland", "Wales", "Northern Ireland"],
+				  "data": [
+				  [9,7,7,7],	// Births
+				  [6,6,6,7]	// Deaths
+				]
+			};
+
+			// Generate niData : Natural Increase (ni) = Births - Deaths
+
+			var niData = jsData.data[0].map((val,idx) => val - jsData.data[1][idx]);
+
+
+			var myData = {
+				labels:	jsData.fields,
+				datasets:	[
+					{
+						type: "line",
+						label: "Natural Increase",
+						data: niData,
+						fill: false,
+						lineTension: 0,
+						borderColor: "blue",
+						radius: 8,
+						pointStyle: "triangle",
+					},
+					{
+						label: "UK population in 2023",
+						data: jsData.data[0],
+						backgroundColor: "green",
+						hoverBackgroundColor: "blue",
+						pointStyle: "rect",
+					},
+					{
+						label: "UK population in 2024",
+						data: jsData.data[1],
+						backgroundColor: "orange",
+						hoverBackgroundColor: "yellow",
+						pointStyle: "rect",
+					},
+				]
+			};
+
+			var myChart = Chart.Bar (ctx, {
+				data:    myData,
+				options: {
+					responsive: false,
+
+					title: {
+						display: true,
+						text: "Inference of UK Population (Millions))",
+						fontSize: 18,
+					},
+
+					legend: {
+						display: true,
+						position: "bottom",
+						labels: {
+							usePointStyle: true,
+						},
+						onClick: null,
+					},
+
+					scales: {
+						xAxes: [{
+							scaleLabel: {
+								display: false,
+							},
+							gridLines: {
+								display: false,
+							},
+							barPercentage: 0.8,
+							categoryPercentage: 0.6,
+						}],
+						yAxes: [{
+							scaleLabel:  {
+								display: true,
+
+								labelString: "Population",
+							},
+							gridLines: {
+								display: true,
+							},
+
+						
+
+							ticks: {
+								min: 0,
+								max: 60,
+								stepSize: 10,
+
+								callback: function(label) {
+										return label+ "M";
+								},
+							}
+						}],
+					}
+				}
+			});
+		</script>
+
+</body></html>

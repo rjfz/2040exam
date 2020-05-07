@@ -1,0 +1,137 @@
+<html><head>
+		<title>Question 2</title>
+		<style>
+			figure {display:inline-block;}
+			fieldset {display:inline-block}
+			figcaption {text-align: center;}
+			input, label {vertical-align:middle;}
+		</style>
+	</head>
+	<body>
+		<fieldset>
+			<legend>Special Effects</legend>
+			<form oninput="outBrightness.value = rngBrightness.valueAsNumber.toFixed(1); draw();">
+				<input name="chkGray" id="chkGray" type="checkbox" onclick="draw();">
+				<label for="chkGray">Color to Gray</label>
+				<br>
+				<input name="chkBrightness" id="chkBrightness" type="checkbox" onclick="rngBrightness.disabled = !this.checked; draw();" checked="">
+				<label for="chkBrightness">Brightness (=<output name="outBrightness">1.0</output>)</label>
+				<input type="range" name="rngBrightness" id="rngBrightness" min="0.2" max="1.8" value="1" step="0.2" list="tick">
+				<datalist id="tick">
+					<option>0.2</option>
+					<option>0.4</option>
+					<option>0.6</option>
+					<option>0.8</option>
+					<option>1.0</option>
+					<option>1.2</option>
+					<option>1.4</option>
+					<option>1.6</option>
+					<option>1.8</option>
+				</datalist>
+				<br>
+				<input name="chkInverse" id="chkInverse" type="checkbox" onclick="draw();">
+				<label for="chkInverse">Inverse Color</label>
+			</form>
+		</fieldset>
+		<br>
+		<figure>
+			<figure>
+				<img id="baby" src="data:image/jpeg;base64,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" alt="baby" width="220" height="290">
+				<figcaption>Fig. 1a - baby (Before)</figcaption>
+			</figure>
+			<figure>
+				<canvas id="cvs" width="220" height="290">
+					This browser does not support HTML5 Canvas.
+				</canvas>
+				<figcaption>Fig. 1b - baby (After)</figcaption>
+			</figure>
+      <figure>
+        <canvas id="cvs1" width="100" height="80">
+          This browser does not support HTML5 Canvas.
+        </canvas>
+        <figcaption>Baby [After] (cropped)</figcaption>
+      </figure>
+			<figcaption>Fig 2 – Baby Special Effects</figcaption>
+		</figure>
+
+		<script>
+			var ctx = document.getElementById("cvs").getContext("2d");
+			var baby = document.getElementById("baby");
+			var ctx1 = document.getElementById("cvs1").getContext("2d");
+			draw();
+
+			function draw()
+			{
+				ctx.drawImage(baby, 0, 0, baby.width, baby.height, 0, 0, baby.width, baby.height);
+				ctx1.drawImage(baby, 60, 80, baby.width, baby.height, 0, 0, baby.width, baby.height);
+				var babyData = ctx.getImageData(0, 0, baby.width, baby.height);
+        var babyData1 = ctx1.getImageData(0, 0, baby.width, baby.height);
+				// pixel manipulation
+
+				var pixels = babyData.data;
+				for (var i=0; i<pixels.length; i+=4) {
+
+					if (document.getElementById("chkGray").checked)
+					{
+						var avg = (pixels[i] + pixels[i+1] + pixels[i+2])/3;
+
+						pixels[i] = avg;
+						pixels[i+1] = avg;
+						pixels[i+2] = avg;
+					}
+
+					if (document.getElementById("chkBrightness").checked)
+					{
+						var f = document.getElementById("rngBrightness").valueAsNumber;
+						pixels[i] = Math.max(0, Math.min (pixels[i]*f, 255));
+						pixels[i+1] = Math.max(0, Math.min (pixels[i+1]*f, 255));
+						pixels[i+2] = Math.max(0, Math.min (pixels[i+2]*f, 255));
+					}
+
+					if (document.getElementById("chkInverse").checked)
+					{
+						pixels[i] = 255 - pixels[i];
+						pixels[i+1] = 255 - pixels[i+1];
+						pixels[i+2] = 255 - pixels[i+2];
+					}
+
+				}
+				var pixels1 = babyData1.data;
+				for (var i=0; i<pixels1.length; i+=4) {
+
+					if (document.getElementById("chkGray").checked)
+					{
+						var avg = (pixels1[i] + pixels1[i+1] + pixels1[i+2])/3;
+
+						pixels1[i] = avg;
+						pixels1[i+1] = avg;
+						pixels1[i+2] = avg;
+					}
+
+					if (document.getElementById("chkBrightness").checked)
+					{
+						var f2 = document.getElementById("rngBrightness").valueAsNumber;
+						pixels1[i] = Math.max(0, Math.min (pixels1[i]*f, 255));
+						pixels1[i+1] = Math.max(0, Math.min (pixels1[i+1]*f, 255));
+						pixels1[i+2] = Math.max(0, Math.min (pixels1[i+2]*f, 255));
+					}
+
+					if (document.getElementById("chkInverse").checked)
+					{
+						pixels1[i] = 255 - pixels1[i];
+						pixels1[i+1] = 255 - pixels1[i+1];
+						pixels1[i+2] = 255 - pixels1[i+2];
+					}
+
+				}
+
+				ctx.putImageData(babyData, 0, 0);
+				ctx1.putImageData(babyData1, 0, 0);
+			}
+
+		</script>
+
+
+
+
+</body></html>
