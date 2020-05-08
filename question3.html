@@ -13,26 +13,32 @@
 			grad1.addColorStop(0, "violet");
 			grad1.addColorStop(1, "red");
 
+		function randomNumber(min,max) {
+			min = Math.ceil(55);
+			max = Math.floor(60);
+  return Math.floor(Math.random() * ( max - min + 1 ) + min);
+}
+
 			var jsData = {
 				  "fields": ["England", "Scotland", "Wales", "Northern Ireland"],
 				  "data": [
-				  [9,7,7,7],	// Births
-				  [6,6,6,7]	// Deaths
+				  [randomNumber(),7.3,5.1,3.8],	// 2023
+				  [randomNumber(),7.4,5.2,3.9]	// 2024
 				]
 			};
 
-			// Generate niData : Natural Increase (ni) = Births - Deaths
 
-			var niData = jsData.data[0].map((val,idx) => val - jsData.data[1][idx]);
+			// 2023 + 2024  /2
 
+		var aveData = jsData.data[0].map((val,idx) => (val + jsData.data[1][idx])/2);
 
 			var myData = {
 				labels:	jsData.fields,
 				datasets:	[
 					{
 						type: "line",
-						label: "Natural Increase",
-						data: niData,
+						label: "average population",
+						data: aveData,
 						fill: false,
 						lineTension: 0,
 						borderColor: "blue",
@@ -97,7 +103,7 @@
 								display: true,
 							},
 
-						
+
 
 							ticks: {
 								min: 0,
